@@ -48,8 +48,14 @@ No Node.js, Python, package installation, database, or server is required.
 
 ```text
 AI-Directory/
-├── AI-Tools-Directory.html   # Main AI tools directory
-└── README.md                 # Project documentation
+├── index.html                    # Main AI tools directory
+├── README.md                     # Project documentation
+├── LICENSE                       # MIT License
+├── CONTRIBUTING.md               # Contribution guidelines
+├── SECURITY.md                   # Security policy
+└── .github/
+    └── workflows/
+        └── deploy-pages.yml      # GitHub Pages deployment
 ```
 
 ## 🛠️ Technology
@@ -70,34 +76,36 @@ The current collection contains approximately **194 tool entries** across the ca
 
 > Availability, pricing, and individual tool features can change over time. Always verify the current terms on the linked service before relying on them.
 
+
+## 🌍 Live Website
+
+The site is configured for **GitHub Pages** deployment from the `main` branch using GitHub Actions.
+
+After GitHub Pages is enabled for the repository, pushes to `main` automatically publish the latest `index.html`.
+
+**Expected Pages URL:**
+`https://nauman-rajput.github.io/AI-Directory/`
+
+## 🔄 Deployment
+
+Deployment is handled by:
+
+- GitHub Actions
+- GitHub Pages
+- `actions/configure-pages`
+- `actions/upload-pages-artifact`
+- `actions/deploy-pages`
+
+A manual workflow run is also available from the repository's **Actions** tab.
+
+## ⚖️ License
+
+This project is released under the **MIT License**. See [LICENSE](LICENSE) for the full text.
+
+## 🔐 Security
+
+Security reporting guidance is available in [SECURITY.md](SECURITY.md).
+
 ## 🤝 Contributing
 
-Contributions are welcome.
-
-You can help by:
-
-- Adding useful AI tools
-- Removing broken or obsolete links
-- Correcting categories or pricing tiers
-- Improving the interface
-- Fixing bugs
-- Improving accessibility and mobile support
-
-When adding a tool, prefer its **official website or official product page** and avoid duplicate URLs.
-
-## 📄 License
-
-No license has currently been specified for this repository.
-
-Unless a license is added, the repository's contents should not be assumed to be freely reusable.
-
-## 👤 Author
-
-Created and maintained by **Muhammad Nauman Rajput**.
-
-- GitHub: [Nauman-rajput](https://github.com/Nauman-rajput)
-- Repository: [AI-Directory](https://github.com/Nauman-rajput/AI-Directory)
-
----
-
-⭐ If you find the directory useful, consider starring the repository.
+Contribution rules are documented in [CONTRIBUTING.md](CONTRIBUTING.md).
