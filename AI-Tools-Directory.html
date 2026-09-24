@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Tools Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0b0d14;--sb:#0e111a;--sur:rgba(255,255,255,.04);--sur2:rgba(255,255,255,.08);
+  --bor:rgba(255,255,255,.08);--borh:rgba(45,212,191,.45);
+  --ac:#2dd4bf;--ac2:#818cf8;--tx:#e6eaf3;--txm:#8390a8;--txd:#4b5670;
+  --fr:#22c55e;--fm:#38bdf8;--pd:#fb923c;--sw:256px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 45% at 10% 0%,rgba(45,212,191,.09),transparent 60%),
+             radial-gradient(ellipse 60% 45% at 95% 100%,rgba(129,140,248,.1),transparent 60%)}
+
+/* Sidebar */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sw);background:var(--sb);
+  border-right:1px solid var(--bor);overflow-y:auto;display:flex;flex-direction:column;z-index:100;
+  transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--bor);border-radius:3px}
+.sb-head{padding:22px 18px 16px;border-bottom:1px solid var(--bor)}
+.sb-head h2{font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;
+  background:linear-gradient(120deg,#fff 10%,var(--ac) 60%,var(--ac2));-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text}
+.sb-head p{font-size:.7rem;color:var(--txm);margin-top:4px}
+.sb-body{padding:14px 10px;flex:1}
+.sb-lbl{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txd);padding:0 8px;margin-bottom:6px;display:block}
+.cb{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;border-radius:10px;
+  padding:8px 9px;cursor:pointer;color:var(--txm);font-family:inherit;transition:all .15s;text-align:left;margin-bottom:1px}
+.cb:hover{background:rgba(45,212,191,.07);color:var(--tx)}
+.cb.on{background:rgba(45,212,191,.14);color:var(--ac)}
+.ci{font-size:.85rem;width:24px;height:24px;border-radius:7px;background:var(--sur);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cn{flex:1;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc{font-size:.65rem;background:var(--sur);border-radius:6px;padding:1px 7px;color:var(--txm)}
+.cb.on .cc{background:rgba(45,212,191,.2);color:var(--ac)}
+
+.ham{display:none;position:fixed;top:12px;left:12px;z-index:200;background:var(--sb);border:1px solid var(--bor);
+  border-radius:10px;width:40px;height:40px;align-items:center;justify-content:center;cursor:pointer;color:var(--tx)}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99;backdrop-filter:blur(2px)}
+
+/* Main */
+.main{margin-left:var(--sw);position:relative;z-index:1;padding:0 30px 70px;max-width:1240px}
+.hdr{padding:46px 0 24px}
+.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);
+  border-radius:100px;padding:4px 13px;font-size:.66rem;font-weight:600;color:var(--ac);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.bdot{width:5px;height:5px;background:var(--ac);border-radius:50%;box-shadow:0 0 6px var(--ac);animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hdr h1{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3.6vw,2.7rem);font-weight:800;letter-spacing:-.025em;
+  background:linear-gradient(120deg,#fff 20%,var(--ac) 65%,var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.hdr p{color:var(--txm);font-size:.9rem;font-weight:300;max-width:480px;line-height:1.6}
+
+.ctrl{display:flex;align-items:center;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+.sw-w{flex:1;min-width:190px;position:relative}
+.sw-w svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--txm);pointer-events:none}
+#search{width:100%;background:var(--sur);border:1px solid var(--bor);border-radius:11px;padding:11px 12px 11px 38px;
+  font-family:inherit;font-size:.87rem;color:var(--tx);outline:none;transition:border-color .2s,box-shadow .2s}
+#search::placeholder{color:var(--txm)}
+#search:focus{border-color:rgba(45,212,191,.45);box-shadow:0 0 0 3px rgba(45,212,191,.08)}
+.sel{background:var(--sur);border:1px solid var(--bor);border-radius:11px;padding:11px 12px;font-family:inherit;font-size:.8rem;color:var(--txm);outline:none;cursor:pointer}
+.sel option{background:#141825}
+
+.tbar{display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
+.tl{font-size:.72rem;color:var(--txm);margin-right:2px}
+.tb{background:var(--sur);border:1px solid var(--bor);border-radius:9px;padding:5px 13px;font-size:.73rem;font-weight:500;cursor:pointer;color:var(--txm);font-family:inherit;transition:all .15s}
+.tb:hover{color:var(--tx);border-color:rgba(255,255,255,.16)}
+.tb.on{background:var(--sur2);color:var(--tx);border-color:rgba(255,255,255,.18)}
+.tb.on[data-t="free"]{background:rgba(34,197,94,.13);color:var(--fr);border-color:rgba(34,197,94,.32)}
+.tb.on[data-t="freemium"]{background:rgba(56,189,248,.12);color:var(--fm);border-color:rgba(56,189,248,.32)}
+.tb.on[data-t="paid"]{background:rgba(251,146,60,.13);color:var(--pd);border-color:rgba(251,146,60,.32)}
+.tcnt{font-size:.78rem;color:var(--txm);margin-left:auto}
+.tcnt strong{color:var(--ac);font-weight:600}
+
+.fav-sec{margin-bottom:24px;padding:14px 16px 16px;background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.2);border-radius:14px}
+.fav-ttl{font-family:'Sora',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ac2);margin-bottom:11px}
+
+/* Grid + card */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px}
+.card{background:var(--sur);border:1px solid var(--bor);border-radius:13px;padding:13px 12px 12px;text-decoration:none;color:var(--tx);
+  display:flex;align-items:flex-start;gap:11px;position:relative;overflow:hidden;
+  transition:transform .18s,border-color .18s,box-shadow .18s,background .18s;animation:up .3s ease both}
+.card:hover{transform:translateY(-2px);border-color:var(--borh);background:var(--sur2);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+@keyframes up{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.icon{width:38px;height:38px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;background:#f4f6fa}
+.icon img{width:24px;height:24px;object-fit:contain;display:block}
+.icon .fi{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:800;color:#fff;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.info{flex:1;min-width:0;padding-right:16px}
+.cname{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:600;line-height:1.35;margin-bottom:2px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cdmn{font-size:.68rem;color:var(--txm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tier{font-size:.56rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:5px;padding:2px 6px}
+.t-free{background:rgba(34,197,94,.13);color:var(--fr)}
+.t-freemium{background:rgba(56,189,248,.12);color:var(--fm)}
+.t-paid{background:rgba(251,146,60,.13);color:var(--pd)}
+.tag{font-size:.56rem;font-weight:500;border-radius:5px;padding:2px 6px;background:var(--sur2);color:var(--txm)}
+
+.fb{position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;font-size:1rem;line-height:1;color:var(--ac2);opacity:.28;transition:opacity .15s,transform .15s;padding:2px}
+.fb:hover,.fb.on{opacity:1}
+.fb.on{transform:scale(1.12)}
+
+#empty{display:none;text-align:center;padding:60px 20px;color:var(--txm)}
+#empty h3{font-family:'Sora',sans-serif;font-size:1.05rem;color:var(--tx);margin-bottom:6px}
+footer{text-align:center;padding:22px 0;border-top:1px solid var(--bor);color:var(--txd);font-size:.74rem;display:flex;flex-direction:column;gap:5px;margin-top:26px}
+footer strong{color:var(--txm)}
+footer a{color:var(--ac2);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none;box-shadow:4px 0 24px rgba(0,0,0,.5)}
+  .ov.show{display:block}
+  .ham{display:flex}
+  .main{margin-left:0;padding:0 14px 60px}
+  .hdr{padding:64px 0 20px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+}
+</style>
+</head>
+<body>
+
+<button class="ham" id="ham" aria-label="Menu">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+<div class="ov" id="ov"></div>
+
+<aside class="sidebar" id="sb">
+  <div class="sb-head"><h2>⚡ AI Arsenal</h2><p id="sb-n">— tools indexed</p></div>
+  <div class="sb-body"><span class="sb-lbl">Categories</span><nav id="cat-nav"></nav></div>
+</aside>
+
+<div class="main">
+  <div class="hdr">
+    <div class="badge"><span class="bdot"></span>AI Tools Collection</div>
+    <h1>Your AI Arsenal</h1>
+    <p>Curated AI tools — one link per tool, organized by category, searchable and starred to your taste.</p>
+  </div>
+
+  <div class="ctrl">
+    <div class="sw-w">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search" type="text" placeholder="Search tools…" autocomplete="off"/>
+    </div>
+    <select class="sel" id="srt">
+      <option value="az">A → Z</option>
+      <option value="za">Z → A</option>
+      <option value="fav">⭐ Starred first</option>
+    </select>
+  </div>
+
+  <div class="tbar">
+    <span class="tl">Tier:</span>
+    <button class="tb on" data-t="all">All</button>
+    <button class="tb" data-t="free">🟢 Free</button>
+    <button class="tb" data-t="freemium">🔵 Freemium</button>
+    <button class="tb" data-t="paid">🟠 Paid</button>
+    <span class="tcnt">Showing <strong id="cnt">0</strong> tools</span>
+  </div>
+
+  <div class="fav-sec" id="fav-sec" style="display:none">
+    <div class="fav-ttl">★ Starred Tools</div>
+    <div class="grid" id="fav-grid"></div>
+  </div>
+
+  <div class="grid" id="wrap"></div>
+  <div id="empty"><h3>No results</h3><p>Try a different search or filter.</p></div>
+
+  <footer>
+    <div><strong id="ft-n">0</strong> unique tools · AI Tools Directory v3</div>
+    <div>Made by <a href="https://www.instagram.com/muhammad.nauman.122/" target="_blank" rel="noopener">@muhammad.nauman.122</a></div>
+  </footer>
+</div>
+
+<script>
+/* Category codes → names */
+const C={
+ CH:["Chatbots & Assistants","Chatbots","💬"],
+ IG:["Image Generation","Image Gen","🎨"],
+ VG:["Video Generation","Video Gen","🎬"],
+ AU:["Audio, Voice & Music","Audio / Music","🎧"],
+ CD:["Coding & Development","Coding","💻"],
+ DS:["Design & UI/UX","Design","✏️"],
+ AW:["Automation & Workflow","Automation","⚙️"],
+ WP:["Writing & Productivity","Writing","📝"],
+ IE:["Image Editing","Image Edit","🖼️"],
+ BL:["Branding & Logos","Branding","🏷️"],
+ PH:["Platforms & Hubs","Platforms","🌐"],
+ DL:["Directories & Learning","Directories","📚"],
+ VE:["Video Editing","Video Edit","✂️"],
+ MC:["Miscellaneous","Misc","📦"]
+};
+const ORDER=Object.keys(C);
+
+/* [name, url, "CAT CODES (first = main)", tier] — each link appears ONCE */
+const RAW=[
+/* Chatbots & Assistants */
+["Google Gemini","https://gemini.google.com/app","CH IG","freemium"],
+["ChatGPT – OpenAI","https://chatgpt.com/","CH IG WP","freemium"],
+["ChatGPT Unlimited Free (chatgptis.org)","https://chatgptis.org/","CH","free"],
+["Claude – Anthropic","https://claude.ai/","CH CD WP","freemium"],
+["Grok AI – xAI","https://grok.com/","CH IG","freemium"],
+["Meta AI","https://www.meta.ai/","CH IG","free"],
+["Kimi AI – Kimi K2 Thinking","https://www.kimi.com/en/","CH CD","freemium"],
+["Pi – Personal AI","https://pi.ai/talk","CH","free"],
+["Z.ai – Free AI Chatbot","https://z.ai/","CH","freemium"],
+["Uncensored AI Chat","https://uncensored.chat/","CH","free"],
+["NotDiamond","https://app.notdiamond.ai/onboarding","CH","freemium"],
+["PersonaChat","https://www.personachat.co/home-v2","CH","freemium"],
+["Google AI Studio – Chat","https://aistudio.google.com/prompts/new_chat","CH","free"],
+["Sintra Max – Sintra AI","https://trysintra.com/","CH","paid"],
+["DeepSeek","https://chat.deepseek.com/","CH CD","free"],
+["Qwen AI","https://qwen.ai/","CH CD","free"],
+["Microsoft Copilot","https://copilot.microsoft.com/","CH IG","free"],
+["Le Chat – Mistral AI","https://chat.mistral.ai/","CH","freemium"],
+["Character.AI","https://character.ai/","CH","freemium"],
+["Poe – Multi-model Chat","https://poe.com/","CH","freemium"],
+["HuggingChat","https://huggingface.co/chat/","CH","free"],
+["Manus – AI Agent","https://manus.im/","CH AW","freemium"],
+["Genspark – AI Agents","https://www.genspark.ai/","CH WP","freemium"],
+["Perplexity AI","https://www.perplexity.ai/","CH WP","freemium"],
+
+/* Image Generation */
+["Adobe Firefly","https://firefly.adobe.com/","IG IE VG","freemium"],
+["PromeAI – AI Art Generator","https://www.promeai.pro/","IG","freemium"],
+["PromeAI – Sketch to Render","https://www.promeai.com/blender","IG DS","freemium"],
+["Perchance – AI Character Generator","https://perchance.org/ai-character-generator","IG","free"],
+["DeepAI – Image Generator","https://deepai.org/machine-learning-model/text2img","IG","freemium"],
+["Leonardo AI","https://leonardo.ai/","IG DS","freemium"],
+["OpenArt – Create","https://openart.ai/create","IG","freemium"],
+["Microsoft Bing Image Creator","https://www.bing.com/images/create","IG","free"],
+["Microsoft Designer – Image Creator","https://designer.microsoft.com/image-creator","IG","free"],
+["Krea AI (Flux)","https://www.krea.ai/home","IG VG IE","freemium"],
+["SeaArt AI","https://www.seaart.ai/","IG","freemium"],
+["Ideogram","https://ideogram.ai/","IG","freemium"],
+["Playground AI","https://playgroundai.com/","IG","freemium"],
+["Recraft V3 – fal.ai Playground","https://fal.ai/models/fal-ai/recraft-v3/playground","IG","freemium"],
+["Seedream – ByteDance","https://seed.bytedance.com/en/seedream4_0","IG","freemium"],
+["Whisk – Google Labs","https://labs.google/fx/tools/whisk/project","IG","free"],
+["Midjourney","https://www.midjourney.com/","IG","paid"],
+["Stability AI","https://stability.ai/","IG","freemium"],
+["Lexica","https://lexica.art/","IG","freemium"],
+["NightCafe Creator","https://creator.nightcafe.studio/","IG","freemium"],
+["Tensor.Art","https://tensor.art/","IG","freemium"],
+["Civitai","https://civitai.com/","IG PH","free"],
+["Meshy AI – 3D Model Generator","https://meshy.ai/","DS IG","freemium"],
+["Emojis.sh – AI Emoji Generator","https://emojis.sh/","IG BL","free"],
+
+/* Video Generation */
+["ImagineArt – Video Generator","https://www.imagine.art/dashboard/video","VG","freemium"],
+["DeepAI – Video Generator","https://deepai.org/video","VG","freemium"],
+["Higgsfield – AI Video & Image","https://higgsfield.ai/","VG IG","freemium"],
+["AnimateAI","https://animateai.pro/","VG","freemium"],
+["Animated Drawings – Meta FAIR","https://sketch.metademolab.com/","VG","free"],
+["D-ID – AI Video from Photos","https://www.d-id.com/","VG","freemium"],
+["Runway","https://app.runwayml.com/","VG VE","freemium"],
+["Decohere","https://www.decohere.ai/home","VG","freemium"],
+["Flow – Google Labs","https://labs.google/fx/tools/flow","VG","free"],
+["Haiper – AI Video Generator","https://haiper.ai/","VG","freemium"],
+["Hedra","https://www.hedra.com/","VG AU","freemium"],
+["PixVerse","https://pixverse.ai/","VG","freemium"],
+["KLING AI Creative Studio","https://www.klingai.com/","VG IG","freemium"],
+["Luma Dream Machine","https://lumalabs.ai/dream-machine","VG","freemium"],
+["Ovi Video Generator","https://ovi.video/","VG","freemium"],
+["Veo 3.1 – Google AI Video (via InVideo)","https://invideo.io/make/googleveo/","VG","freemium"],
+["Wondershare Virbo","https://virbo.wondershare.com/","VG VE","freemium"],
+["Wan AI","https://wan.video/","VG","freemium"],
+["Waver AI","https://waver.ai/","VG","freemium"],
+["Sora – OpenAI","https://sora.com/","VG","paid"],
+["Pika","https://pika.art/","VG","freemium"],
+["Hailuo AI – MiniMax","https://hailuoai.video/","VG","freemium"],
+["Vidu","https://www.vidu.com/","VG","freemium"],
+["HeyGen – AI Avatar Videos","https://www.heygen.com/","VG","freemium"],
+["Synthesia","https://www.synthesia.io/","VG","freemium"],
+
+/* Audio, Voice & Music */
+["ElevenLabs – AI Text to Speech","https://elevenlabs.io/speech-synthesis","AU","freemium"],
+["TTSMaker – Free Text to Speech","https://ttsmaker.com/","AU","free"],
+["MetaVoice – Real-time AI Voice","https://themetavoice.xyz/","AU","freemium"],
+["MusicGen – Hugging Face (Meta)","https://huggingface.co/spaces/facebook/MusicGen","AU","free"],
+["Dubverse – Online Video Dubbing","https://dubverse.ai/","AU VE","freemium"],
+["Voicemaker – Text to Speech","https://voicemaker.in/","AU","freemium"],
+["Suno – AI Music","https://suno.com/","AU","freemium"],
+["Udio – AI Music","https://www.udio.com/","AU","freemium"],
+["Murf AI – Voiceovers","https://murf.ai/","AU","freemium"],
+["Adobe Podcast – Enhance Speech","https://podcast.adobe.com/","AU","freemium"],
+["Fish Audio – Voice Cloning","https://fish.audio/","AU","freemium"],
+
+/* Coding & Development */
+["CodeSquire","https://www.codesquire.ai/","CD","freemium"],
+["CodeSquire – Code Generator","https://www.codesquire.ai/code-generator","CD","freemium"],
+["CodeSquire – Code Reviewer","https://www.codesquire.ai/code-reviewer","CD","freemium"],
+["Builder.io","https://www.builder.io/","CD DS","freemium"],
+["Render – Cloud Platform","https://render.com/","CD","freemium"],
+["Gemini Developer API – Google AI","https://ai.google.dev/","CD","free"],
+["Google AI Studio – Build Apps","https://aistudio.google.com/apps","CD","free"],
+["HackerAI – AI Penetration Testing","https://hackerai.com/","CD","freemium"],
+["IMG2HTML – Image to HTML","https://www.img2html.com/","CD","free"],
+["OpenAI Platform – Agent Builder","https://platform.openai.com/agent-builder","CD AW","paid"],
+["OpenAI API – Docs","https://platform.openai.com/docs/introduction","CD","free"],
+["Lovable","https://lovable.dev/","CD DS","freemium"],
+["Neo AI Engineer","https://heyneo.so/","CD","freemium"],
+["Replit","https://replit.com/","CD","freemium"],
+["v0 by Vercel","https://v0.dev/","CD DS","freemium"],
+["Vercel – Frontend Cloud","https://vercel.com/","CD","freemium"],
+["Cursor","https://cursor.com/","CD","freemium"],
+["Devin – AI Software Engineer","https://devin.ai/","CD","paid"],
+["BLACKBOX AI","https://blackbox.ai/","CD CH","freemium"],
+["GitHub Copilot","https://github.com/features/copilot","CD","freemium"],
+["Windsurf","https://windsurf.com/","CD","freemium"],
+["Bolt.new","https://bolt.new/","CD DS","freemium"],
+["Claude Code","https://claude.com/product/claude-code","CD","paid"],
+["OpenAI Codex","https://openai.com/codex/","CD","paid"],
+["Tabnine","https://www.tabnine.com/","CD","freemium"],
+
+/* Design & UI/UX */
+["Adobe Express","https://new.express.adobe.com/","DS IE VE","freemium"],
+["Bezi AI","https://www.bezi.com/ai","DS","freemium"],
+["Pixcap","https://pixcap.com/","DS","freemium"],
+["FigJam AI Prompts – Figma","https://www.figma.com/community/collections/best-figjam-ai-prompts","DS","freemium"],
+["Galileo AI","https://www.usegalileo.ai/explore","DS","freemium"],
+["Immersity AI – Image & Video to 3D","https://www.immersity.ai/","DS","freemium"],
+["Khroma – AI Color Tool","https://www.khroma.co/train","DS","free"],
+["Microsoft Designer","https://designer.microsoft.com/","DS IE","free"],
+["Dora – 3D Websites","https://www.dora.run/recents","DS CD","freemium"],
+["Shots – Create Mockups","https://shots.so/","DS","freemium"],
+["Stylar AI","https://www.stylar.ai/","DS IE","freemium"],
+["Uizard – UI Design with AI","https://uizard.io/","DS","freemium"],
+["Canva","https://www.canva.com/","DS IE VE BL","freemium"],
+["Figma","https://www.figma.com/","DS","freemium"],
+["Framer","https://www.framer.com/","DS CD","freemium"],
+["Stitch – Google","https://stitch.withgoogle.com/","DS","free"],
+
+/* Automation & Workflow */
+["n8n – AI Workflow","https://n8n.io/","AW","freemium"],
+["BooSend – Instagram DM Automation","https://boosend.ai/","AW","paid"],
+["ManyChat","https://app.manychat.com/","AW CH","freemium"],
+["Make.com","https://www.make.com/en/welcome","AW","freemium"],
+["ZyloChat – Create Automations","https://zylochat.com/automations/create","AW","paid"],
+["Zapier","https://zapier.com/","AW","freemium"],
+["Lindy – AI Agents","https://www.lindy.ai/","AW","freemium"],
+
+/* Writing & Productivity */
+["TinyWow – Free AI Writing & Tools","https://tinywow.com/","WP","free"],
+["Gamma – AI Presentations & Websites","https://gamma.app/","WP DS","freemium"],
+["NotebookLM – Google","https://notebooklm.google.com/","WP AU","free"],
+["Kome – AI Summary & Bookmark","https://kome.ai/","WP","freemium"],
+["SaaS Prompts – ChatGPT Prompts","https://saasprompts.com/","WP DL","free"],
+["Calligrapher AI – Handwriting Generator","https://calligrapher.ai/","WP","free"],
+["Notion AI","https://www.notion.com/product/ai","WP","freemium"],
+["Grammarly","https://www.grammarly.com/","WP","freemium"],
+["QuillBot","https://quillbot.com/","WP","freemium"],
+["Jasper","https://www.jasper.ai/","WP","paid"],
+["Otter.ai – Meeting Notes","https://otter.ai/","WP AU","freemium"],
+["Napkin AI – Text to Visuals","https://www.napkin.ai/","WP DS","freemium"],
+
+/* Image Editing */
+["SVG.io – AI Text to SVG","https://svg.io/","IE IG","freemium"],
+["Clipdrop","https://clipdrop.co/","IE IG","freemium"],
+["Colorize – Black & White Photos","https://imagecolorizer.com/colorize","IE","freemium"],
+["Remaker – Faceswap","https://remaker.ai/en","IE","freemium"],
+["TinyWow – Background Remover","https://tinywow.com/image/remove-bg","IE","free"],
+["Magnific AI – Image Upscaler","https://magnific.ai/","IE","paid"],
+["Vectorizer.AI","https://vectorizer.ai/","IE","freemium"],
+["remove.bg","https://www.remove.bg/","IE","freemium"],
+["Photoroom","https://www.photoroom.com/","IE DS","freemium"],
+
+/* Branding & Logos */
+["ni3 – AI Thumbnail Maker","https://www.ni3.app/","BL","freemium"],
+["NeamX – AI Thumbnail Maker","https://neamx.com/","BL","freemium"],
+["Package Design App","https://www.packagedesign.app/","BL DS","freemium"],
+["PicOfMe – AI Profile Picture","https://picofme.io/","BL","freemium"],
+["Logo Diffusion","https://app.logodiffusion.com/","BL IG","freemium"],
+["Looka – Logo Maker","https://looka.com/","BL","freemium"],
+["Brandmark","https://brandmark.io/","BL","freemium"],
+
+/* Platforms & Hubs */
+["Bytez – Open Source AI","https://bytez.com/","PH","free"],
+["Google DeepMind","https://deepmind.google/","PH","free"],
+["Google DeepMind – Models","https://deepmind.google/models/","PH","free"],
+["fal.ai – Generative Media Platform","https://fal.ai/","PH CD IG VG","freemium"],
+["fal.ai – Model Gallery","https://fal.ai/models","PH","freemium"],
+["Google Labs","https://labs.google/","PH","free"],
+["Hugging Face","https://huggingface.co/","PH CD","free"],
+["Hugging Face – Spaces","https://huggingface.co/spaces","PH","free"],
+["ImagineArt – Creative Suite","https://www.imagine.art/","PH IG VG","freemium"],
+["Freepik – AI Suite","https://www.freepik.com/","PH IG VG DS","freemium"],
+["Arena AI – Official AI Ranking","https://arena.ai/spaces","PH","free"],
+["ATXP Chat","https://atxp.chat/","PH CH","free"],
+["Replicate","https://replicate.com/","PH CD","paid"],
+["OpenRouter","https://openrouter.ai/","PH CD","freemium"],
+["Groq","https://groq.com/","PH CD","freemium"],
+
+/* Directories & Learning */
+["AI Valley","https://aivalley.ai/","DL","free"],
+["Andrei Kovalev's Midlibrary","https://midlibrary.io/","DL IG","free"],
+["PromptVine – ChatGPT Prompts Library","https://promptvine.com/","DL WP","free"],
+["Futurepedia – AI Tools Directory","https://www.futurepedia.io/","DL","free"],
+["Midjourney – Parameter List","https://docs.midjourney.com/docs/parameter-list","DL IG","free"],
+["Supertools – Best AI Tools Guide","https://supertools.therundown.ai/","DL","free"],
+["There's An AI For That","https://theresanaiforthat.com/","DL","free"],
+["Learn Prompting","https://learnprompting.org/docs/intro","DL","free"],
+["Transitional Hooks – Video Hook Library","https://transitionalhooks.com/social-media-video-hook-library/","DL VE","free"],
+["Toolify.ai – AI Tools Directory","https://www.toolify.ai/","DL","free"],
+["Prompt Engineering Guide","https://www.promptingguide.ai/","DL","free"],
+
+/* Video Editing */
+["Clipchamp","https://app.clipchamp.com/login","VE","freemium"],
+["VEED – Video Editing","https://www.veed.io/","VE VG","freemium"],
+["Loom","https://www.loom.com/","VE","freemium"],
+["CapCut","https://www.capcut.com/","VE","freemium"],
+["Descript","https://www.descript.com/","VE AU","freemium"],
+["Opus Clip","https://www.opus.pro/","VE","freemium"],
+["Submagic – AI Captions","https://www.submagic.co/","VE","paid"],
+
+/* Miscellaneous */
+["Best Interactive Flat Panel – SmartInfoVision","https://www.smartinfovision.com/","MC","free"],
+["Dehancer + Batman LUT – Google Drive","https://drive.google.com/drive/folders/1hbkKFXlxiQNnFn4MUfe5r7e_m2sKxzyI","MC VE","free"],
+["dril (product link)","https://www.ubuy.co.in/product/PMVET6EDI-rst-hyperdrive","MC","free"],
+["GoDaddy Domain Name Search","https://www.godaddy.com/","MC","paid"]
+];
+
+/* ---------- helpers ---------- */
+const dm=u=>{try{return new URL(u).hostname.replace(/^www\./,'')}catch{return u}};
+const sk=n=>n.replace(/^[^A-Za-z0-9]+/,'').toUpperCase();
+const HUES=[172,215,262,330,25,145,48,195,290,8];
+const hue=s=>{let h=0;for(const ch of s)h=(h*31+ch.charCodeAt(0))>>>0;return HUES[h%HUES.length]};
+const iconSrcs=d=>[
+  `https://icons.duckduckgo.com/ip3/${d}.ico`,
+  `https://www.google.com/s2/favicons?domain=${d}&sz=64`,
+  `https://${d}/favicon.ico`
+];
+
+/* One entry per link — de-dupe safety net */
+const seen=new Set();
+const tools=[];
+RAW.forEach(([n,u,c,t])=>{
+  const key=u.toLowerCase().replace(/^https?:\/\/(www\.)?/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
+  if(seen.has(key)){console.warn('Duplicate skipped:',n,u);return}
+  seen.add(key);
+  tools.push({n,u,t,c:c.split(' ')});
+});
+
+let aC='ALL',q='',aT='all',aS='az';
+let favs=new Set();
+try{favs=new Set(JSON.parse(localStorage.getItem('ai-favs')||'[]'))}catch(e){}
+const saveFavs=()=>{try{localStorage.setItem('ai-favs',JSON.stringify([...favs]))}catch(e){}};
+
+document.getElementById('ft-n').textContent=tools.length;
+document.getElementById('sb-n').textContent=`${tools.length} tools indexed`;
+
+function sorted(list){
+  if(aS==='za')return [...list].sort((a,b)=>sk(b.n).localeCompare(sk(a.n)));
+  if(aS==='fav')return [...list].sort((a,b)=>(favs.has(b.u)?1:0)-(favs.has(a.u)?1:0)||sk(a.n).localeCompare(sk(b.n)));
+  return [...list].sort((a,b)=>sk(a.n).localeCompare(sk(b.n)));
+}
+
+function buildNav(){
+  const nav=document.getElementById('cat-nav');nav.innerHTML='';
+  const mk=(label,icon,cnt,key)=>{
+    const b=document.createElement('button');
+    b.className='cb'+(aC===key?' on':'');
+    b.innerHTML=`<span class="ci">${icon}</span><span class="cn">${label}</span><span class="cc">${cnt}</span>`;
+    b.onclick=()=>{aC=key;render();closeSidebar();window.scrollTo({top:0,behavior:'smooth'})};
+    nav.appendChild(b);
+  };
+  mk('All Tools','✦',tools.length,'ALL');
+  ORDER.forEach(k=>{
+    const n=tools.filter(t=>t.c.includes(k)).length;
+    if(n)mk(C[k][1],C[k][2],n,k);
+  });
+}
+
+function makeIcon(t){
+  const ic=document.createElement('div');ic.className='icon';
+  const d=dm(t.u),srcs=iconSrcs(d);let i=0;
+  const letter=()=>{ic.innerHTML='';ic.style.background=`hsl(${hue(t.n)} 55% 42%)`;
+    const sp=document.createElement('span');sp.className='fi';sp.textContent=sk(t.n)[0]||'?';ic.appendChild(sp)};
+  const img=document.createElement('img');img.alt='';
+  img.onerror=()=>{i++;if(i<srcs.length)img.src=srcs[i];else letter()};
+  img.onload=()=>{if(img.naturalWidth<=1)img.onerror()};
+  img.src=srcs[0];ic.appendChild(img);
+  return ic;
+}
+
+function makeCard(t,i){
+  const a=document.createElement('a');
+  a.href=t.u;a.target='_blank';a.rel='noopener noreferrer';
+  a.className='card';a.style.animationDelay=`${Math.min(i,40)*.012}s`;
+
+  const inf=document.createElement('div');inf.className='info';
+  const nm=document.createElement('div');nm.className='cname';nm.title=t.n;nm.textContent=t.n;
+  const dd=document.createElement('div');dd.className='cdmn';dd.textContent=dm(t.u);
+  const meta=document.createElement('div');meta.className='meta';
+  const tr=document.createElement('span');tr.className=`tier t-${t.t}`;tr.textContent=t.t;meta.appendChild(tr);
+  t.c.slice(0,2).forEach(k=>{const g=document.createElement('span');g.className='tag';g.textContent=C[k][1];meta.appendChild(g)});
+  inf.append(nm,dd,meta);
+
+  const fb=document.createElement('button');
+  const on=favs.has(t.u);
+  fb.className='fb'+(on?' on':'');fb.title=on?'Unstar':'Star';fb.textContent=on?'★':'☆';
+  fb.addEventListener('click',e=>{
+    e.preventDefault();e.stopPropagation();
+    favs.has(t.u)?favs.delete(t.u):favs.add(t.u);saveFavs();render();
+  });
+
+  a.append(makeIcon(t),inf,fb);return a;
+}
+
+function render(){
+  const wrap=document.getElementById('wrap'),empty=document.getElementById('empty');
+  const qs=q.toLowerCase().trim();
+  const f=tools.filter(t=>{
+    const ms=!qs||t.n.toLowerCase().includes(qs)||dm(t.u).includes(qs)||t.c.some(k=>C[k][0].toLowerCase().includes(qs));
+    const mc=aC==='ALL'||t.c.includes(aC);
+    const mt=aT==='all'||t.t===aT;
+    return ms&&mc&&mt;
+  });
+
+  buildNav();
+  document.getElementById('cnt').textContent=f.length;
+  wrap.innerHTML='';
+
+  const fs=document.getElementById('fav-sec'),fg=document.getElementById('fav-grid');
+  const fl=tools.filter(t=>favs.has(t.u));
+  if(fl.length){fs.style.display='';fg.innerHTML='';fl.forEach((t,i)=>fg.appendChild(makeCard(t,i)))}
+  else fs.style.display='none';
+
+  if(!f.length){empty.style.display='block';return}
+  empty.style.display='none';
+  sorted(f).forEach((t,i)=>wrap.appendChild(makeCard(t,i)));
+}
+
+document.getElementById('search').addEventListener('input',e=>{q=e.target.value;render()});
+document.getElementById('srt').addEventListener('change',e=>{aS=e.target.value;render()});
+document.querySelectorAll('.tb').forEach(b=>b.addEventListener('click',()=>{
+  aT=b.dataset.t;
+  document.querySelectorAll('.tb').forEach(x=>x.className='tb'+(x.dataset.t===aT?' on':''));
+  render();
+}));
+
+const sb=document.getElementById('sb'),ov=document.getElementById('ov');
+const closeSidebar=()=>{sb.classList.remove('open');ov.classList.remove('show')};
+document.getElementById('ham').addEventListener('click',()=>{sb.classList.toggle('open');ov.classList.toggle('show')});
+ov.addEventListener('click',closeSidebar);
+
+render();
+</script>
+</body>
+</html>
