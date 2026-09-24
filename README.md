@@ -53,9 +53,6 @@ AI-Directory/
 ├── LICENSE                       # MIT License
 ├── CONTRIBUTING.md               # Contribution guidelines
 ├── SECURITY.md                   # Security policy
-└── .github/
-    └── workflows/
-        └── deploy-pages.yml      # GitHub Pages deployment
 ```
 
 ## 🛠️ Technology
@@ -76,33 +73,11 @@ The current collection contains **234 tool entries** across the categories above
 
 > Availability, pricing, and individual tool features can change over time. Always verify the current terms on the linked service before relying on them.
 
-
 ## 🔎 Source & Curation
 
 New entries are cross-checked against multiple curated AI-tool repositories and directories, including [best-of-ai/ai-directories](https://github.com/best-of-ai/ai-directories) and other maintained open-source AI-tool lists. Duplicate URLs are excluded from the directory.
 
 > Tool availability, pricing, and features can change. Official links are preferred wherever available.
-
-## 🌍 Live Website
-
-The site is configured for **GitHub Pages** deployment from the `main` branch using GitHub Actions.
-
-After GitHub Pages is enabled for the repository, pushes to `main` automatically publish the latest `index.html`.
-
-**Expected Pages URL:**
-`https://nauman-rajput.github.io/AI-Directory/`
-
-## 🔄 Deployment
-
-Deployment is handled by:
-
-- GitHub Actions
-- GitHub Pages
-- `actions/configure-pages`
-- `actions/upload-pages-artifact`
-- `actions/deploy-pages`
-
-A manual workflow run is also available from the repository's **Actions** tab.
 
 ## ⚖️ License
 
