@@ -69,7 +69,7 @@ The project intentionally avoids unnecessary frameworks and dependencies. Someti
 
 ## 📊 Directory
 
-The current collection contains **234 tool entries** across the categories above. Entries include the tool name, direct URL, category, and pricing tier. The collection is periodically expanded by cross-checking curated AI-tool repositories and directories.
+The current collection contains **235 tool entries** across the categories above. Entries include the tool name, direct URL, category, and pricing tier. The collection is periodically expanded by cross-checking curated AI-tool repositories and directories.
 
 > Availability, pricing, and individual tool features can change over time. Always verify the current terms on the linked service before relying on them.
 
