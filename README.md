@@ -39,7 +39,7 @@ The project provides a lightweight, responsive interface for discovering AI tool
 The directory is a standalone HTML application.
 
 1. Clone or download the repository.
-2. Open `AI-Tools-Directory.html` in a modern web browser.
+2. Open `index.html` in a modern web browser.
 3. Search, filter, sort, and star tools as needed.
 
 No Node.js, Python, package installation, database, or server is required.
@@ -72,10 +72,16 @@ The project intentionally avoids unnecessary frameworks and dependencies. Someti
 
 ## 📊 Directory
 
-The current collection contains approximately **194 tool entries** across the categories above. Entries include the tool name, direct URL, category, and pricing tier.
+The current collection contains **234 tool entries** across the categories above. Entries include the tool name, direct URL, category, and pricing tier. The collection is periodically expanded by cross-checking curated AI-tool repositories and directories.
 
 > Availability, pricing, and individual tool features can change over time. Always verify the current terms on the linked service before relying on them.
 
+
+## 🔎 Source & Curation
+
+New entries are cross-checked against multiple curated AI-tool repositories and directories, including [best-of-ai/ai-directories](https://github.com/best-of-ai/ai-directories) and other maintained open-source AI-tool lists. Duplicate URLs are excluded from the directory.
+
+> Tool availability, pricing, and features can change. Official links are preferred wherever available.
 
 ## 🌍 Live Website
 
