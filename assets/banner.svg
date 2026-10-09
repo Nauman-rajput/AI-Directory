@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+<title id="title">AI Arsenal</title><desc id="desc">A curated AI tools directory. Discover. Filter. Build.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101927"/><stop offset="1" stop-color="#0b0d14"/></linearGradient><linearGradient id="accent"><stop stop-color="#2dd4bf"/><stop offset="1" stop-color="#818cf8"/></linearGradient></defs>
+<rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+<rect x="1" y="1" width="1198" height="318" rx="23" fill="none" stroke="#27344b"/>
+<path d="M900 0v320M1000 0v320M1100 0v320M820 80h380M820 160h380M820 240h380" stroke="#27344b" opacity=".35"/>
+<rect x="64" y="55" width="166" height="29" rx="14" fill="#173935"/>
+<text x="83" y="75" fill="#2dd4bf" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">AI DIRECTORY</text>
+<text x="64" y="157" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="67" font-weight="700" letter-spacing="-2">AI Arsenal</text>
+<text x="67" y="204" fill="#9eacc3" font-family="Arial,sans-serif" font-size="23">Discover. Filter. Build.</text>
+<rect x="66" y="243" width="310" height="3" rx="1.5" fill="url(#accent)"/>
+<text x="66" y="278" fill="#8390a8" font-family="Arial,sans-serif" font-size="14">CURATED TOOLS · ONE LIGHTWEIGHT DIRECTORY</text>
+<rect x="880" y="65" width="206" height="190" rx="28" fill="#111c2b" stroke="#334155"/>
+<path d="m1003 101-62 78h46l-22 47 69-83h-47z" fill="url(#accent)"/>
+</svg>

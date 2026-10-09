@@ -1,23 +1,43 @@
-# Contributing
+# Contributing to AI Arsenal
 
-Thanks for helping improve AI Directory.
+Help keep the directory useful, accurate and easy to maintain. Focus each pull request on one clearly described improvement.
 
-## Adding or updating a tool
+## Suggest a tool
 
-- Prefer the official website or official product page.
-- Check that the URL is reachable before submitting it.
-- Do not add the same URL more than once.
-- Put each tool in the most relevant category.
-- Keep the pricing tier accurate and label it as Free, Freemium, or Paid.
-- Use a clear, descriptive tool name.
-- Avoid promotional claims that cannot be verified.
+Open a [tool suggestion](https://github.com/Nauman-rajput/AI-Directory/issues/new/choose) with its name, official URL, main use case, proposed category and current pricing source.
 
-## Pull requests
+Before submitting:
 
-1. Fork the repository.
-2. Create a focused branch for your change.
-3. Make the update.
-4. Check the HTML locally in a modern browser.
-5. Open a pull request with a clear description of what changed.
+- Check the directory for the same tool, another name or another URL for the same service.
+- Prefer an official product page over affiliate links, mirrors or onboarding URLs.
+- Confirm the URL is reachable and the pricing label matches the listed product.
+- Use Free for free access, Freemium for limited free usage with upgrades, and Paid when payment is required after any temporary trial.
+- Keep names descriptive and avoid unsupported promotional claims.
 
-For larger changes, explain the reason and any compatibility considerations.
+## Edit the directory
+
+Tools are four-field entries in the `RAW` array in `index.html`:
+
+```js
+["Tool name", "https://official.example/", "CH WP", "freemium"],
+```
+
+Use existing category codes from `C`; the first code is the main category. Insert the entry in its primary category's section. Preserve the standalone HTML workflow and the maintainer's attribution.
+
+If the number of entries changes, update the README tool count and badge, and the HTML meta description.
+
+## Validate your change
+
+Run `node scripts/validate-directory.cjs` with Node.js. No package installation is required.
+
+In a modern browser, check relevant behavior: search, category and pricing filters, sorting, favorites after reload, and narrow-screen navigation. For interface changes, check Tab navigation, visible focus, Escape and reduced-motion preferences.
+
+## Submit a pull request
+
+1. Fork the repository and create a focused branch.
+2. Make and validate your change.
+3. Describe the resulting behavior and include validation performed.
+4. For tool additions or pricing changes, link the official source.
+5. Include screenshots for meaningful visual changes when possible.
+
+Report ordinary bugs with the bug template. Follow [SECURITY.md](SECURITY.md) for sensitive vulnerabilities.

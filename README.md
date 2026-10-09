@@ -1,92 +1,120 @@
-# ⚡ AI Directory
+<p align="center">
+  <img src="assets/banner.svg" alt="AI Arsenal — Discover. Filter. Build." width="900" />
+</p>
 
-A curated collection of **AI tools, platforms, and resources** organized in one searchable directory.
+<p align="center">
+  <a href="https://nauman-rajput.github.io/AI-Directory/">Explore the directory</a> ·
+  <a href="#getting-started">Run locally</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a> ·
+  <a href="https://github.com/Nauman-rajput/AI-Directory/issues/new/choose">Suggest a tool</a>
+</p>
 
-The project provides a lightweight, responsive interface for discovering AI tools across categories such as chatbots, image generation, video generation, audio, coding, design, automation, writing, image editing, branding, AI platforms, learning resources, and video editing.
+<p align="center">
+  <a href="https://github.com/Nauman-rajput/AI-Directory/actions/workflows/deploy-pages.yml"><img src="https://github.com/Nauman-rajput/AI-Directory/actions/workflows/deploy-pages.yml/badge.svg" alt="Validation and deployment status" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2dd4bf" alt="MIT license" /></a>
+  <img src="https://img.shields.io/badge/tools-255-818cf8" alt="255 tools" />
+  <img src="https://img.shields.io/badge/categories-14-38bdf8" alt="14 categories" />
+  <img src="https://img.shields.io/badge/built_with-HTML_CSS_JavaScript-fb923c" alt="HTML, CSS and JavaScript" />
+</p>
 
-## ✨ Features
+# AI Arsenal
 
-- 🔎 **Instant search** by tool name, domain, or category
-- 🗂️ **Category filtering** for quick discovery
-- 💰 **Pricing-tier filters**: Free, Freemium, and Paid
-- 🔤 **A → Z / Z → A sorting**
-- ⭐ **Star/favorite tools** with preferences saved in the browser
-- 🌐 **Direct links** to the listed tools
-- 🖼️ **Automatic website icons/favicons** with a fallback letter icon
-- 📱 **Responsive design** for desktop and mobile
-- ⚡ **No framework or build process required**
-- 🧹 **Duplicate-link protection** so the same URL is only listed once
+A searchable directory of **255 tools** across **14 categories**, built for discovering AI assistants, creative tools, developer platforms and research resources.
 
-## 📚 Categories
+Search by name, domain or category; narrow the collection by pricing; and keep your favorite tools close. The application runs from one HTML file, with no build step, account or backend required.
 
-- 💬 Chatbots & Assistants
-- 🎨 Image Generation
-- 🎬 Video Generation
-- 🎧 Audio, Voice & Music
-- 💻 Coding & Development
-- ✏️ Design & UI/UX
-- ⚙️ Automation & Workflow
-- 📝 Writing & Productivity
-- 🖼️ Image Editing
-- 🏷️ Branding & Logos
-- 🌐 Platforms & Hubs
-- 📚 Directories & Learning
-- ✂️ Video Editing
-- 📦 Miscellaneous
+## Features
 
-## 🚀 Usage
+| Feature | What you can do |
+| --- | --- |
+| Search and filters | Search instantly and combine category and Free, Freemium or Paid filters. |
+| Sorting | Browse A → Z, Z → A, or starred tools first. |
+| Saved favorites | Star tools and retain your choices in the same browser. |
+| Responsive interface | Use the directory on mobile, tablet and desktop. |
+| Keyboard access | Skip to content, use labeled controls and close the mobile menu with Escape. |
+| Lightweight delivery | Load icons lazily; use a letter fallback if icon sources fail. |
+| Share previews | Page description and social metadata identify the directory when shared. |
+| Automated validation | Check entry format, categories, pricing tiers, duplicate URLs and JavaScript syntax before deployment. |
 
-The directory is a standalone HTML application.
+## Categories
 
-1. Clone or download the repository.
-2. Open `index.html` in a modern web browser.
-3. Search, filter, sort, and star tools as needed.
+| Discover | Create | Build and work |
+| --- | --- | --- |
+| Chatbots & Assistants | Image Generation | Coding & Development |
+| Platforms & Hubs | Video Generation | Automation & Workflow |
+| Directories & Learning | Audio, Voice & Music | Writing & Productivity |
+| Miscellaneous | Design & UI/UX | Image Editing |
+| | Branding & Logos | Video Editing |
 
-No Node.js, Python, package installation, database, or server is required.
+## Getting started
 
-## 📁 Project Structure
+Use the [live directory](https://nauman-rajput.github.io/AI-Directory/) or download `index.html` and open it in a modern browser.
+
+To work with the repository:
+
+```bash
+git clone https://github.com/Nauman-rajput/AI-Directory.git
+cd AI-Directory
+```
+
+Open `index.html`, or serve it locally for a consistent browser origin:
+
+```bash
+python -m http.server 8000
+```
+
+Then visit `http://localhost:8000`. Python is optional; it is only needed for this local-server command. External fonts, icons and linked services require internet access.
+
+## Adding a tool
+
+Entries live in the `RAW` array inside `index.html`:
+
+```js
+["Tool name", "https://official.example/", "CH WP", "freemium"],
+```
+
+The fields are **name**, **official URL**, **category codes** and **pricing tier**. The first category is the primary category; additional codes make the tool discoverable in other categories.
+
+- **Free:** the listed tool is available without a paid plan.
+- **Freemium:** limited free usage or credits are available, with paid upgrades.
+- **Paid:** a paid plan is required; a temporary trial alone does not make a tool free.
+
+Prefer official product pages, verify pricing, and avoid duplicate URLs or unsupported promotional claims. See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete process.
+
+## Validation and deployment
+
+Run the dependency-free validator with Node.js:
+
+```bash
+node scripts/validate-directory.cjs
+```
+
+Also check search, filters, favorites and mobile navigation in a browser. The validator checks data and syntax; it does not confirm that external websites are reachable or that their prices remain current.
+
+GitHub Actions validates pushes to `main` and pull requests. Successful pushes to `main` publish the HTML application to GitHub Pages. Pull requests run validation without deploying.
+
+## Project structure
 
 ```text
 AI-Directory/
-├── index.html                    # Main AI tools directory
-├── README.md                     # Project documentation
-├── LICENSE                       # MIT License
-├── CONTRIBUTING.md               # Contribution guidelines
-├── SECURITY.md                   # Security policy
+├── index.html                  # Standalone directory and tool data
+├── assets/banner.svg           # Repository banner
+├── scripts/validate-directory.cjs
+├── .github/                    # Workflow and contribution templates
+├── README.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+└── LICENSE
 ```
 
-## 🛠️ Technology
+## Privacy and curation
 
-Built with standard web technologies:
+Favorites are stored in your browser's local storage; they do not sync between devices. Clearing browser data removes them. Google Fonts and third-party favicon services receive requests when the page loads; visiting a tool follows that service's own policies.
 
-- **HTML5**
-- **CSS3**
-- **Vanilla JavaScript**
-- **Web Storage API** for saved favorites
-- External favicon services for automatic tool icons
+Pricing, availability and regional access can change. Confirm current terms on each official website. Inclusion is a discovery reference, not an endorsement or a guarantee of accuracy.
 
-The project intentionally avoids unnecessary frameworks and dependencies. Sometimes plain HTML and JavaScript are perfectly capable of doing the job, despite the industry's ongoing attempt to put React inside a toaster.
+## Maintainer and license
 
-## 📊 Directory
+Created and maintained by **Muhammad Nauman Rajput** · [GitHub](https://github.com/Nauman-rajput) · [LinkedIn](https://www.linkedin.com/in/muhammad-nauman-800b50433/)
 
-The current collection contains **235 tool entries** across the categories above. Entries include the tool name, direct URL, category, and pricing tier. The collection is periodically expanded by cross-checking curated AI-tool repositories and directories.
-
-> Availability, pricing, and individual tool features can change over time. Always verify the current terms on the linked service before relying on them.
-
-## 🔎 Source & Curation
-
-New entries are cross-checked against multiple curated AI-tool repositories and directories, including [best-of-ai/ai-directories](https://github.com/best-of-ai/ai-directories) and other maintained open-source AI-tool lists. Duplicate URLs are excluded from the directory.
-
-> Tool availability, pricing, and features can change. Official links are preferred wherever available.
-
-## ⚖️ License
-
-This project is released under the **MIT License**. See [LICENSE](LICENSE) for the full text.
-
-## 🔐 Security
-
-Security reporting guidance is available in [SECURITY.md](SECURITY.md).
-
-## 🤝 Contributing
-
-Contribution rules are documented in [CONTRIBUTING.md](CONTRIBUTING.md).
+Released under the [MIT License](LICENSE). For vulnerability reporting, see [SECURITY.md](SECURITY.md).

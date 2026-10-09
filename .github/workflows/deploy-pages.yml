@@ -1,38 +1,54 @@
-name: Deploy AI Directory to GitHub Pages
+name: Validate and Deploy AI Arsenal
 
 on:
   push:
+    branches: ["main"]
+  pull_request:
     branches: ["main"]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
+  validate:
+    name: Validate directory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate entries and JavaScript
+        run: node scripts/validate-directory.cjs
+
   deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name != 'pull_request'
+    needs: validate
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-
+      - name: Prepare public site
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
-
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
