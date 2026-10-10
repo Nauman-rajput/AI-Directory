@@ -12,14 +12,16 @@
 <p align="center">
   <a href="https://github.com/Nauman-rajput/AI-Directory/actions/workflows/deploy-pages.yml"><img src="https://github.com/Nauman-rajput/AI-Directory/actions/workflows/deploy-pages.yml/badge.svg" alt="Validation and deployment status" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2dd4bf" alt="MIT license" /></a>
-  <img src="https://img.shields.io/badge/tools-255-818cf8" alt="255 tools" />
-  <img src="https://img.shields.io/badge/categories-14-38bdf8" alt="14 categories" />
+  <img src="https://img.shields.io/badge/tools-480-818cf8" alt="480 tools" />
+  <img src="https://img.shields.io/badge/categories-26-38bdf8" alt="26 categories" />
   <img src="https://img.shields.io/badge/built_with-HTML_CSS_JavaScript-fb923c" alt="HTML, CSS and JavaScript" />
 </p>
 
 # AI Arsenal
 
-A searchable directory of **255 tools** across **14 categories**, built for discovering AI assistants, creative tools, developer platforms and research resources.
+A searchable directory of **480 tools** across **26 categories**, built for discovering AI assistants, creative tools, developer platforms and research resources.
+
+A midnight and champagne interface pairs animated gradients, orbital artwork and glass-style cards with practical discovery tools. Open any card to read its individual introduction before visiting the provider.
 
 Search by name, domain or category; narrow the collection by pricing; and keep your favorite tools close. The application runs from one HTML file, with no build step, account or backend required.
 
@@ -27,7 +29,11 @@ Search by name, domain or category; narrow the collection by pricing; and keep y
 
 | Feature | What you can do |
 | --- | --- |
-| Search and filters | Search instantly and combine category and Free, Freemium or Paid filters. |
+| Search and filters | Search instantly and combine category and Free, Freemium, Paid or Check plans filters. |
+| Tool introductions | Open an accessible popup with an individual description, categories, a favorite button and an official website link. |
+| Visual design | Animated hero artwork, gradient typography, card reveals, hover lighting and subtle tilt effects. |
+| Motion controls | Toggle decorative motion; respect the system’s reduced-motion preference. |
+| Navigation shortcuts | Sticky search and filters, `/` to focus search, scroll progress and a back-to-top button. |
 | Sorting | Browse A → Z, Z → A, or starred tools first. |
 | Saved favorites | Star tools and retain your choices in the same browser. |
 | Responsive interface | Use the directory on mobile, tablet and desktop. |
@@ -38,13 +44,21 @@ Search by name, domain or category; narrow the collection by pricing; and keep y
 
 ## Categories
 
-| Discover | Create | Build and work |
-| --- | --- | --- |
-| Chatbots & Assistants | Image Generation | Coding & Development |
-| Platforms & Hubs | Video Generation | Automation & Workflow |
-| Directories & Learning | Audio, Voice & Music | Writing & Productivity |
-| Miscellaneous | Design & UI/UX | Image Editing |
-| | Branding & Logos | Video Editing |
+| Category | Category |
+| --- | --- |
+| Chatbots & Assistants | Miscellaneous |
+| Image Generation | Marketing & Sales |
+| Video Generation | Education & Research |
+| Audio, Voice & Music | 3D Models & Worlds |
+| Coding & Development | Architecture & Interiors |
+| Design & UI/UX | Travel Planning |
+| Automation & Workflow | Fashion & Beauty |
+| Writing & Productivity | Careers & Hiring |
+| Image Editing | Legal & Contracts |
+| Branding & Logos | Accessibility |
+| Platforms & Hubs | Healthcare & Wellness |
+| Directories & Learning | Games & Storytelling |
+| Video Editing | Finance & Business Planning |
 
 ## Getting started
 
@@ -79,6 +93,14 @@ The fields are **name**, **official URL**, **category codes** and **pricing tier
 - **Freemium:** limited free usage or credits are available, with paid upgrades.
 - **Paid:** a paid plan is required; a temporary trial alone does not make a tool free.
 
+- **Check plans (`unknown`):** pricing has not been verified; check the provider’s current plans.
+
+Add a matching description to `TOOL_INTROS`, keyed by the exact URL:
+
+```js
+"https://official.example/": "Tool name helps users perform a specific task. Describe its actual capabilities without unsupported claims.",
+```
+
 Prefer official product pages, verify pricing, and avoid duplicate URLs or unsupported promotional claims. See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete process.
 
 ## Validation and deployment
@@ -109,7 +131,9 @@ AI-Directory/
 
 ## Privacy and curation
 
-Favorites are stored in your browser's local storage; they do not sync between devices. Clearing browser data removes them. Google Fonts and third-party favicon services receive requests when the page loads; visiting a tool follows that service's own policies.
+Favorites and the motion preference are stored in your browser's local storage; they do not sync between devices. Clearing browser data removes them. Google Fonts and third-party favicon services receive requests when the page loads; visiting a tool follows that service's own policies.
+
+The expanded collection includes tools discovered through Aixploria’s homepage and category rankings, with links to providers. It is not an exhaustive copy of Aixploria’s database.
 
 Pricing, availability and regional access can change. Confirm current terms on each official website. Inclusion is a discovery reference, not an endorsement or a guarantee of accuracy.
 
