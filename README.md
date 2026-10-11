@@ -62,57 +62,6 @@ Search by name, domain or category; narrow the collection by pricing; and keep y
 | AI Models & Weights | Embeddings & Retrieval |
 | Time-Series Forecasting | |
 
-## Verified model collection
-
-The directory includes 40 additional model entries linked to author-owned Hugging Face model cards. Browse **AI Models & Weights** to see the entire addition, or use the task categories for language, vision, audio, image generation, video, 3D and coding. Dedicated **Embeddings & Retrieval** and **Time-Series Forecasting** categories cover search components and numeric forecasting models.
-
-Every model has an individual introduction in its popup. These entries are specific models, not 40 new companies: for example, Hermes-4 is distinct from Hermes Agent, and Hunyuan-A13B is distinct from Hunyuan3D. Older versions and preview checkpoints are identified in their descriptions. ERNIE’s `PT` suffix denotes PyTorch weights; StarCoder2-7B is a code-completion base model.
-
-Model entries use **Check plans** because a downloadable weight license does not establish hosted inference pricing or unrestricted commercial use. F5-TTS and Command R7B have non-commercial weights; EXAONE, Falcon, Hunyuan, CogVideoX and Jina embeddings have specific license terms described or linked in their model cards. The repository’s MIT license does not relicense third-party models. Check the author’s current card before use.
-
-| Model | Main purpose |
-| --- | --- |
-| [Phi-4-mini-instruct](https://huggingface.co/microsoft/Phi-4-mini-instruct) | Chat / reasoning |
-| [SmolLM3-3B](https://huggingface.co/HuggingFaceTB/SmolLM3-3B) | Chat / reasoning |
-| [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | Chat / reasoning |
-| [Falcon-H1-1.5B-Instruct](https://huggingface.co/tiiuae/Falcon-H1-1.5B-Instruct) | Chat / reasoning |
-| [AI21-Jamba-Reasoning-3B](https://huggingface.co/ai21labs/AI21-Jamba-Reasoning-3B) | Chat / reasoning |
-| [Hermes-4-14B](https://huggingface.co/NousResearch/Hermes-4-14B) | Chat / reasoning |
-| [EXAONE-4.0-1.2B](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B) | Chat / reasoning |
-| [Apertus-8B-Instruct-2509](https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509) | Chat / reasoning |
-| [Granite-4.0-Micro](https://huggingface.co/ibm-granite/granite-4.0-micro) | Chat / reasoning |
-| [Nemotron-Nano-9B-v2](https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2) | Chat / reasoning |
-| [InternLM3-8B-Instruct](https://huggingface.co/internlm/internlm3-8b-instruct) | Chat / reasoning |
-| [InternVL3-2B](https://huggingface.co/OpenGVLab/InternVL3-2B) | Vision / language |
-| [MiniCPM-V-4](https://huggingface.co/openbmb/MiniCPM-V-4) | Vision / language |
-| [ERNIE-4.5-0.3B-PT](https://huggingface.co/baidu/ERNIE-4.5-0.3B-PT) | Chat / reasoning |
-| [Hunyuan-A13B-Instruct](https://huggingface.co/tencent/Hunyuan-A13B-Instruct) | Chat / reasoning |
-| [Step3](https://huggingface.co/stepfun-ai/step3) | Vision / language |
-| [BGE-M3](https://huggingface.co/BAAI/bge-m3) | Embeddings / retrieval |
-| [multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large) | Embeddings / retrieval |
-| [Jina embeddings v4](https://huggingface.co/jinaai/jina-embeddings-v4) | Embeddings / retrieval |
-| [Nomic embed text v2 MoE](https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe) | Embeddings / retrieval |
-| [GTE multilingual base](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) | Embeddings / retrieval |
-| [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) | Embeddings / retrieval |
-| [Chronos-2](https://huggingface.co/amazon/chronos-2) | Forecasting |
-| [TimesFM 2.5 200M](https://huggingface.co/google/timesfm-2.5-200m-pytorch) | Forecasting |
-| [Parakeet TDT 0.6B v2](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) | Speech recognition |
-| [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) | Text to speech |
-| [F5-TTS](https://huggingface.co/SWivid/F5-TTS) | Text to speech |
-| [SANA 1.5 1.6B](https://huggingface.co/Efficient-Large-Model/SANA1.5_1.6B_1024px_diffusers) | Image generation |
-| [Lumina-Image-2.0](https://huggingface.co/Alpha-VLLM/Lumina-Image-2.0) | Image generation |
-| [CogVideoX-5B](https://huggingface.co/zai-org/CogVideoX-5b) | Video generation |
-| [TRELLIS image large](https://huggingface.co/microsoft/TRELLIS-image-large) | 3D generation |
-| [SAM 2 Hiera Large](https://huggingface.co/facebook/sam2-hiera-large) | Computer vision |
-| [Florence-2-large](https://huggingface.co/microsoft/Florence-2-large) | Computer vision |
-| [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf) | Computer vision |
-| [Command R7B](https://huggingface.co/CohereLabs/c4ai-command-r7b-12-2024) | Chat / reasoning |
-| [Yi-1.5-9B-Chat](https://huggingface.co/01-ai/Yi-1.5-9B-Chat) | Chat / reasoning |
-| [StarCoder2-7B](https://huggingface.co/bigcode/starcoder2-7b) | Code completion |
-| [Sarvam-M](https://huggingface.co/sarvamai/sarvam-m) | Chat / reasoning |
-| [Sailor2-1B-Chat](https://huggingface.co/sail/Sailor2-1B-Chat) | Chat / reasoning |
-| [Solar Pro Preview Instruct](https://huggingface.co/upstage/solar-pro-preview-instruct) | Chat / reasoning |
-
 ## Getting started
 
 Use the [live directory](https://nauman-rajput.github.io/AI-Directory/) or download `index.html` and open it in a modern browser.
