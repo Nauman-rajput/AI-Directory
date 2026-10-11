@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AI Tools Directory</title>
-<meta name="description" content="Discover 480 AI tools for chat, coding, images, video, audio and productivity. Search by category, filter pricing and save your favorites."/>
+<meta name="description" content="Discover 520 AI tools and models for chat, coding, images, video, audio and productivity. Search by category, filter pricing and save your favorites."/>
 <meta name="theme-color" content="#06080f"/>
 <link rel="canonical" href="https://nauman-rajput.github.io/AI-Directory/"/>
 <meta property="og:type" content="website"/>
@@ -488,7 +488,7 @@ footer .footer-author strong{font-family:'Instrument Serif',Georgia,serif;font-w
     <div class="hero-copy">
     <h1>Big ideas.<span class="hero-gradient">The right AI.</span></h1>
     <p>Find your next creative advantage. Explore AI for work, learning and imagination — all in one place.</p>
-    <div class="hero-details"><span><i class="detail-dot"></i><strong id="hero-count">480</strong> tools to discover</span><span><strong id="hero-category-count">26</strong> categories</span><span>Save your favorites</span></div></div>
+    <div class="hero-details"><span><i class="detail-dot"></i><strong id="hero-count">520</strong> tools to discover</span><span><strong id="hero-category-count">29</strong> categories</span><span>Save your favorites</span></div></div>
     <div class="hero-art" aria-hidden="true"><div class="orbit two"></div><div class="orbit"></div><div class="orbit three"></div><div class="art-core"><svg viewBox="0 0 64 64" fill="none"><path d="M32 7l6.8 18.2L57 32l-18.2 6.8L32 57l-6.8-18.2L7 32l18.2-6.8L32 7Z" stroke="#b7fff1" stroke-width="2" fill="#a4ffe810"/><path d="m48 7 2.4 6.6L57 16l-6.6 2.4L48 25l-2.4-6.6L39 16l6.6-2.4L48 7Z" fill="#d2baff"/></svg></div><span class="hero-art-label">ENDLESS POSSIBILITIES</span><div class="art-chip chip-one"><i>✧</i>Create something</div><div class="art-chip chip-two"><i>⌘</i>Build smarter</div><div class="art-chip chip-three"><i>↗</i>Learn more</div></div>
   </div>
 
@@ -585,7 +585,10 @@ const C={
  AC:["Accessibility", "Accessibility", "♿"],
  HC:["Healthcare & Wellness", "Healthcare", "🩺"],
  GM:["Games & Storytelling", "Games", "🎮"],
- FN:["Finance & Business Planning", "Finance", "💹"]
+ FN:["Finance & Business Planning", "Finance", "💹"],
+ ML:["AI Models & Weights", "AI Models", "🧠"],
+ EM:["Embeddings & Retrieval", "Embeddings", "🔎"],
+ FC:["Time-Series Forecasting", "Forecasting", "📊"]
 };
 const ORDER=Object.keys(C);
 
@@ -1099,7 +1102,49 @@ const RAW=[
 ["Kilo Code", "https://kilo.ai/", "CD AW", "unknown"],
 ["Danelfin", "https://danelfin.com/", "FN PH", "unknown"],
 ["LivePlan", "https://www.liveplan.com/", "FN WP", "unknown"],
-["Intuit Assist", "https://www.intuit.com/intuitassist/", "FN WP", "unknown"]
+["Intuit Assist", "https://www.intuit.com/intuitassist/", "FN WP", "unknown"],
+
+/* Verified model cards — weights and hosted services have separate terms. */
+["Phi-4-mini-instruct", "https://huggingface.co/microsoft/Phi-4-mini-instruct", "CH ML", "unknown"],
+["SmolLM3-3B", "https://huggingface.co/HuggingFaceTB/SmolLM3-3B", "CH ML", "unknown"],
+["Olmo-3-7B-Instruct", "https://huggingface.co/allenai/Olmo-3-7B-Instruct", "CH ML", "unknown"],
+["Falcon-H1-1.5B-Instruct", "https://huggingface.co/tiiuae/Falcon-H1-1.5B-Instruct", "CH ML", "unknown"],
+["AI21-Jamba-Reasoning-3B", "https://huggingface.co/ai21labs/AI21-Jamba-Reasoning-3B", "CH ML", "unknown"],
+["Hermes-4-14B", "https://huggingface.co/NousResearch/Hermes-4-14B", "CH ML", "unknown"],
+["EXAONE-4.0-1.2B", "https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B", "CH ML", "unknown"],
+["Apertus-8B-Instruct-2509", "https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509", "CH ML", "unknown"],
+["Granite-4.0-Micro", "https://huggingface.co/ibm-granite/granite-4.0-micro", "CH ML", "unknown"],
+["Nemotron-Nano-9B-v2", "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2", "CH ML", "unknown"],
+["InternLM3-8B-Instruct", "https://huggingface.co/internlm/internlm3-8b-instruct", "CH ML", "unknown"],
+["InternVL3-2B", "https://huggingface.co/OpenGVLab/InternVL3-2B", "ML ED IE", "unknown"],
+["MiniCPM-V-4", "https://huggingface.co/openbmb/MiniCPM-V-4", "ML ED IE", "unknown"],
+["ERNIE-4.5-0.3B-PT", "https://huggingface.co/baidu/ERNIE-4.5-0.3B-PT", "CH ML", "unknown"],
+["Hunyuan-A13B-Instruct", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct", "CH ML", "unknown"],
+["Step3", "https://huggingface.co/stepfun-ai/step3", "ML ED IE", "unknown"],
+["BGE-M3", "https://huggingface.co/BAAI/bge-m3", "EM ML CD", "unknown"],
+["multilingual-e5-large", "https://huggingface.co/intfloat/multilingual-e5-large", "EM ML CD", "unknown"],
+["Jina embeddings v4", "https://huggingface.co/jinaai/jina-embeddings-v4", "EM ML CD", "unknown"],
+["Nomic embed text v2 MoE", "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe", "EM ML CD", "unknown"],
+["GTE multilingual base", "https://huggingface.co/Alibaba-NLP/gte-multilingual-base", "EM ML CD", "unknown"],
+["all-MiniLM-L6-v2", "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2", "EM ML CD", "unknown"],
+["Chronos-2", "https://huggingface.co/amazon/chronos-2", "FC ML FN", "unknown"],
+["TimesFM 2.5 200M", "https://huggingface.co/google/timesfm-2.5-200m-pytorch", "FC ML FN", "unknown"],
+["Parakeet TDT 0.6B v2", "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2", "AU ML AC", "unknown"],
+["Kokoro-82M", "https://huggingface.co/hexgrad/Kokoro-82M", "AU ML", "unknown"],
+["F5-TTS", "https://huggingface.co/SWivid/F5-TTS", "AU ML", "unknown"],
+["SANA 1.5 1.6B", "https://huggingface.co/Efficient-Large-Model/SANA1.5_1.6B_1024px_diffusers", "IG ML", "unknown"],
+["Lumina-Image-2.0", "https://huggingface.co/Alpha-VLLM/Lumina-Image-2.0", "IG ML", "unknown"],
+["CogVideoX-5B", "https://huggingface.co/zai-org/CogVideoX-5b", "VG ML", "unknown"],
+["TRELLIS image large", "https://huggingface.co/microsoft/TRELLIS-image-large", "TD ML", "unknown"],
+["SAM 2 Hiera Large", "https://huggingface.co/facebook/sam2-hiera-large", "IE ML ED", "unknown"],
+["Florence-2-large", "https://huggingface.co/microsoft/Florence-2-large", "IE ML ED", "unknown"],
+["Depth Anything V2 Small", "https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf", "IE ML ED", "unknown"],
+["Command R7B", "https://huggingface.co/CohereLabs/c4ai-command-r7b-12-2024", "CH ML", "unknown"],
+["Yi-1.5-9B-Chat", "https://huggingface.co/01-ai/Yi-1.5-9B-Chat", "CH ML", "unknown"],
+["StarCoder2-7B", "https://huggingface.co/bigcode/starcoder2-7b", "CD ML", "unknown"],
+["Sarvam-M", "https://huggingface.co/sarvamai/sarvam-m", "CH ML", "unknown"],
+["Sailor2-1B-Chat", "https://huggingface.co/sail/Sailor2-1B-Chat", "CH ML", "unknown"],
+["Solar Pro Preview Instruct", "https://huggingface.co/upstage/solar-pro-preview-instruct", "CH ML", "unknown"]
 ];
 
 /* ---------- helpers ---------- */
@@ -1711,7 +1756,47 @@ const TOOL_INTROS={
   "https://kilo.ai/": "Kilo Code is an open-source AI coding agent available through an IDE extension, command-line tools and cloud workflows. It helps developers write, explain, debug and improve code with a choice of AI models.",
   "https://danelfin.com/": "Danelfin uses AI-assisted analysis to score stocks and ETFs. It presents market research and comparative signals rather than guaranteed predictions of investment performance.",
   "https://www.liveplan.com/": "LivePlan is a business planning and forecasting platform. Its AI assistance helps develop business-plan text alongside tools for financial projections and performance tracking.",
-  "https://www.intuit.com/intuitassist/": "Intuit Assist brings generative AI assistance into Intuit’s financial software. It supports tasks such as understanding business information and preparing responses within supported product workflows."
+  "https://www.intuit.com/intuitassist/": "Intuit Assist brings generative AI assistance into Intuit’s financial software. It supports tasks such as understanding business information and preparing responses within supported product workflows.",
+  "https://huggingface.co/microsoft/Phi-4-mini-instruct": "Microsoft’s Phi-4-mini-instruct is a 3.8B instruction-tuned language model for conversation, reasoning, mathematics and function calling. It is a downloadable model rather than the Copilot application; its weights use the MIT license.",
+  "https://huggingface.co/HuggingFaceTB/SmolLM3-3B": "SmolLM3 is Hugging Face’s 3B language model with reasoning and non-reasoning modes, multilingual support and long-context processing. It is designed for assistant and language tasks. The author publishes its weights under Apache 2.0.",
+  "https://huggingface.co/allenai/Olmo-3-7B-Instruct": "Ai2’s Olmo-3-7B-Instruct is an instruction-tuned language model for conversational and general language tasks. The Olmo project also releases training data and development resources to support research into how language models are built. This listing is the Instruct variant.",
+  "https://huggingface.co/tiiuae/Falcon-H1-1.5B-Instruct": "Falcon-H1-1.5B-Instruct is TII’s compact instruction-tuned language model. Its hybrid architecture combines Transformer attention and Mamba state-space layers for text generation and assistant tasks. Its weights are governed by the Falcon-LLM License.",
+  "https://huggingface.co/ai21labs/AI21-Jamba-Reasoning-3B": "AI21’s Jamba Reasoning 3B is a compact reasoning language model built with a hybrid Transformer and Mamba architecture. It supports working through problems and generating text responses. The author releases this model under Apache 2.0.",
+  "https://huggingface.co/NousResearch/Hermes-4-14B": "Hermes-4-14B is Nous Research’s instruction and reasoning fine-tune of Qwen3-14B. It supports general assistant tasks, structured responses, mathematics and coding. This is a language model, distinct from the Hermes Agent application already listed here.",
+  "https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B": "EXAONE-4.0-1.2B is LG AI Research’s compact language model with reasoning and non-reasoning modes and support for tool-oriented tasks. The weights use the EXAONE AI Model License Agreement 1.2 – NC; downloading them does not establish permission for commercial use.",
+  "https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509": "Apertus-8B-Instruct-2509 is Swiss AI’s multilingual instruction-tuned language model. The project emphasizes transparent development and releases model weights alongside training resources. This entry links to the specific 8B instruction checkpoint, whose weights use Apache 2.0.",
+  "https://huggingface.co/ibm-granite/granite-4.0-micro": "Granite-4.0-Micro is IBM’s 3B instruction-tuned language model for general assistance, retrieval-augmented generation and tool use. It can generate text from prompts and retrieved information. The weights are released under Apache 2.0.",
+  "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2": "NVIDIA-Nemotron-Nano-9B-v2 is NVIDIA’s language model for reasoning and non-reasoning text tasks. Its behavior can be configured through the system prompt. This entry links to the downloadable model, governed by the NVIDIA Open Model License.",
+  "https://huggingface.co/internlm/internlm3-8b-instruct": "InternLM3-8B-Instruct is an 8B instruction-tuned language model from the InternLM project. It supports general conversation and advanced reasoning with conversation and thinking modes. The author releases the model under Apache 2.0.",
+  "https://huggingface.co/OpenGVLab/InternVL3-2B": "InternVL3-2B is OpenGVLab’s multimodal language model for understanding images and text. It can answer visual questions and support tasks such as document and chart understanding. The model combines a vision encoder with a language component and uses Apache 2.0.",
+  "https://huggingface.co/openbmb/MiniCPM-V-4": "MiniCPM-V-4 is OpenBMB’s multimodal model for single-image, multiple-image and video understanding. It answers questions about visual content and is designed with efficient inference in mind. Its model card provides deployment examples and Apache 2.0 licensing.",
+  "https://huggingface.co/baidu/ERNIE-4.5-0.3B-PT": "ERNIE-4.5-0.3B-PT is Baidu’s small post-trained text language model. The official card specifies 0.36B parameters and provides conversational inference examples. The PT suffix identifies Transformer-style PyTorch weights; it does not mean this checkpoint is a pretrained-only base model.",
+  "https://huggingface.co/tencent/Hunyuan-A13B-Instruct": "Hunyuan-A13B-Instruct is Tencent’s instruction-tuned mixture-of-experts language model for reasoning, conversation and tool-oriented tasks. It has 80B total parameters with 13B active per token. It is separate from Hunyuan3D and uses the Tencent Hunyuan A13B license.",
+  "https://huggingface.co/stepfun-ai/step3": "Step3 is StepFun’s multimodal reasoning model for vision and language tasks. Its mixture-of-experts architecture has 321B total parameters with 38B active. This is a large downloadable model, not a lightweight desktop assistant; its weights use Apache 2.0.",
+  "https://huggingface.co/BAAI/bge-m3": "BGE-M3 is BAAI’s multilingual retrieval and embedding model. It supports dense retrieval, sparse retrieval and multi-vector retrieval, helping search systems find relevant passages across languages and document lengths. It produces retrieval representations rather than conversational answers and uses MIT licensing.",
+  "https://huggingface.co/intfloat/multilingual-e5-large": "multilingual-e5-large is a multilingual text embedding model published by intfloat. It converts queries and passages into vectors for semantic similarity and information retrieval. It is useful as a component in search and retrieval-augmented generation systems, rather than as a standalone chatbot.",
+  "https://huggingface.co/jinaai/jina-embeddings-v4": "Jina embeddings v4 is Jina AI’s multimodal embedding model for text and visual document retrieval, built on Qwen2.5-VL. It maps content into representations for finding related information. Its model card identifies the governing license as the Qwen Research License.",
+  "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe": "Nomic embed text v2 MoE is Nomic AI’s multilingual mixture-of-experts text embedding model. It represents text for semantic search and retrieval-augmented generation workflows. It returns embeddings rather than chat replies, and its weights use Apache 2.0.",
+  "https://huggingface.co/Alibaba-NLP/gte-multilingual-base": "GTE multilingual base is Alibaba NLP’s multilingual text embedding model. It converts text into representations for semantic matching and retrieval, including search over documents in different languages. It is an embedding component, distinct from the Qwen chat assistant, and uses Apache 2.0.",
+  "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2": "all-MiniLM-L6-v2 is a compact Sentence Transformers model that maps sentences and paragraphs to embedding vectors. It supports semantic similarity, clustering and search. It is not a conversational language model, and its weights are published under Apache 2.0.",
+  "https://huggingface.co/amazon/chronos-2": "Chronos-2 is Amazon’s time-series forecasting model. It generates forecasts from historical observations and supports multivariate data and covariates. This is a forecasting model rather than the Amazon Nova assistant family; its weights use Apache 2.0.",
+  "https://huggingface.co/google/timesfm-2.5-200m-pytorch": "TimesFM 2.5 200M is Google Research’s foundation model for time-series forecasting. It produces future estimates from historical numeric sequences. This entry links to its PyTorch checkpoint; the author notes that the checkpoint itself is not an officially supported Google product.",
+  "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2": "Parakeet TDT 0.6B v2 is NVIDIA’s English automatic speech recognition model. It transcribes audio with punctuation, capitalization and timestamp support. The 600M-parameter model uses CC BY 4.0; the card also links to the newer multilingual v3 release.",
+  "https://huggingface.co/hexgrad/Kokoro-82M": "Kokoro-82M is Hexgrad’s compact text-to-speech model with 82 million parameters. It turns written text into spoken audio using supported voices and languages. The author publishes Apache-licensed weights and links an official demo from the model card.",
+  "https://huggingface.co/SWivid/F5-TTS": "F5-TTS is a text-to-speech model that uses reference audio to condition speech generation. It supports generating spoken audio from text and is accompanied by the SWivid research implementation. The published weights use CC BY-NC 4.0; the code license is separate.",
+  "https://huggingface.co/Efficient-Large-Model/SANA1.5_1.6B_1024px_diffusers": "SANA 1.5 1.6B is a text-to-image diffusion model from the SANA project. It generates images from written prompts, with this checkpoint targeting 1024-pixel output. Its metadata lists Apache 2.0, while the model card describes intended use as research.",
+  "https://huggingface.co/Alpha-VLLM/Lumina-Image-2.0": "Lumina-Image-2.0 is Alpha-VLLM’s 2B flow-based diffusion transformer for text-to-image generation. It creates images from written descriptions, with inference examples provided through the Diffusers library. Its weights are published under Apache 2.0.",
+  "https://huggingface.co/zai-org/CogVideoX-5b": "CogVideoX-5B is a text-to-video model published by Z.ai. It generates video clips from written descriptions and provides downloadable weights and inference examples. It is distinct from the Z.ai chat assistant and is governed by the CogVideoX License.",
+  "https://huggingface.co/microsoft/TRELLIS-image-large": "TRELLIS image large is Microsoft’s image-conditioned 3D generation model. It creates 3D assets from an input image using structured 3D latent representations. This listing links to the downloadable image-conditioned checkpoint, published under the MIT license.",
+  "https://huggingface.co/facebook/sam2-hiera-large": "SAM 2 Hiera Large is Meta’s Segment Anything 2 model for promptable object segmentation in images and videos. It identifies and tracks selected regions rather than generating chat answers. The author provides model weights and inference examples under Apache 2.0.",
+  "https://huggingface.co/microsoft/Florence-2-large": "Florence-2-large is Microsoft’s vision foundation model for prompt-based tasks such as image captioning, object detection, OCR and segmentation. It interprets an image together with a task prompt and produces the corresponding output. Its weights use MIT licensing.",
+  "https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf": "Depth Anything V2 Small is a compact computer-vision model for monocular depth estimation. It predicts relative depth from a single image, helping applications understand scene structure. This entry links to the Hugging Face implementation of the Small checkpoint, released under Apache 2.0.",
+  "https://huggingface.co/CohereLabs/c4ai-command-r7b-12-2024": "Command R7B is Cohere Labs’ 7B multilingual language model for conversation, retrieval-augmented generation and tool use. Its research weights use CC BY-NC 4.0 and require accepting access conditions. Hosted services have separate terms; this is not an unrestricted commercial release.",
+  "https://huggingface.co/01-ai/Yi-1.5-9B-Chat": "Yi-1.5-9B-Chat is 01.AI’s conversational language model focused on English and Chinese, with support for instruction-following, reasoning and coding tasks. Its weights use Apache 2.0. This listing is a specific older checkpoint, not a claim that it is the latest Yi release.",
+  "https://huggingface.co/bigcode/starcoder2-7b": "StarCoder2-7B is BigCode’s code-generation base model trained on programming-language data. It supports code completion and fill-in-the-middle tasks. It is not instruction-tuned for general chat, and its weights are governed by the BigCode OpenRAIL-M license.",
+  "https://huggingface.co/sarvamai/sarvam-m": "Sarvam-M is Sarvam AI’s multilingual, hybrid-reasoning language model built on Mistral Small. It is post-trained for Indian languages and English, with conversation, mathematics and coding capabilities. Its weights use Apache 2.0; this introduction does not claim Urdu support.",
+  "https://huggingface.co/sail/Sailor2-1B-Chat": "Sailor2-1B-Chat is Sea AI Lab’s conversational model for English, Chinese and Southeast Asian languages. It builds on Qwen2.5 and is part of the Sailor2 multilingual research project. This specific small chat checkpoint is released under Apache 2.0.",
+  "https://huggingface.co/upstage/solar-pro-preview-instruct": "Solar Pro Preview Instruct is Upstage’s 22B instruction-tuned language model for conversation and text tasks. It is an older preview checkpoint with limited language coverage and a 4K context window. Its weights use MIT licensing; this entry does not represent the latest Solar model."
 };
 function introFor(t){return TOOL_INTROS[t.u]||"No verified introduction is available for this resource."}
 const toolDialog=document.getElementById('tool-dialog');
