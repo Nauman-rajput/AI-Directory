@@ -1,0 +1,68 @@
+name: Clean old deployment records
+on:
+  push:
+    branches: ["cleanup-deployment-history-20261011"]
+    paths: [".github/workflows/cleanup-deployments.yml"]
+permissions:
+  deployments: write
+concurrency:
+  group: cleanup-deployment-history
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Preserve latest deployment and remove older records
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        run: |
+          node <<'NODE'
+          const base = 'https://api.github.com/repos/' + process.env.GH_REPOSITORY;
+          const keepId = 6989182665;
+          const keepSha = 'bd49ca199ca5362d2c9e408771df9157e99b9abc';
+          async function api(path, method = 'GET', body) {
+            const r = await fetch(base + path, {
+              method,
+              headers: { Authorization: 'Bearer ' + process.env.GH_TOKEN, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' },
+              body: body ? JSON.stringify(body) : undefined,
+              signal: AbortSignal.timeout(30000)
+            });
+            if (!r.ok) throw new Error(method + ' ' + path + ': HTTP ' + r.status + ' ' + await r.text());
+            return r.status === 204 ? null : await r.json();
+          }
+          async function list() {
+            const all = [];
+            for (let page = 1; ; page++) {
+              const batch = await api('/deployments?environment=github-pages&per_page=100&page=' + page);
+              all.push(...batch);
+              if (batch.length < 100) return all;
+            }
+          }
+          (async () => {
+            const records = await list();
+            records.sort((a,b) => b.id - a.id);
+            if (records[0]?.id !== keepId || records[0]?.sha !== keepSha) throw new Error('Latest deployment changed; refusing cleanup.');
+            const status = await api('/deployments/' + keepId + '/statuses');
+            if (status[0]?.state !== 'success') throw new Error('Preserved deployment is not successful.');
+            const old = records.filter(d => d.id !== keepId);
+            if (old.length !== 18) throw new Error('Expected exactly 18 old records; found ' + old.length);
+            console.log('Preserving deployment ' + keepId + ' (' + keepSha + ')');
+            for (const d of old) {
+              if (d.environment !== 'github-pages' || d.id >= keepId) throw new Error('Unsafe deletion target.');
+              const s = await api('/deployments/' + d.id + '/statuses');
+              if (s[0]?.state === 'success') {
+                await api('/deployments/' + d.id + '/statuses', 'POST', { state: 'inactive', auto_inactive: false, description: 'Historical deployment cleanup; latest live deployment preserved.' });
+              } else if (['queued','pending','in_progress'].includes(s[0]?.state)) {
+                throw new Error('Deployment is still running: ' + d.id);
+              }
+              await api('/deployments/' + d.id, 'DELETE');
+              console.log('Deleted old deployment ' + d.id);
+            }
+            const remaining = await list();
+            if (remaining.length !== 1 || remaining[0].id !== keepId) throw new Error('Unexpected remaining records.');
+            const finalStatus = await api('/deployments/' + keepId + '/statuses');
+            if (finalStatus[0]?.state !== 'success') throw new Error('Latest deployment status changed.');
+            console.log('Verified: 18 deleted; latest successful deployment preserved.');
+          })().catch(e => { console.error(e.message); process.exitCode = 1; });
+          NODE
