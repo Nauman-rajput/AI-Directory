@@ -21,22 +21,26 @@
 
 A searchable directory of **520 tools** across **29 categories**, built for discovering AI assistants, creative tools, developer platforms and research resources.
 
-A midnight and champagne interface pairs animated gradients, orbital artwork and glass-style cards with practical discovery tools. Open any card to read its individual introduction before visiting the provider.
+A compact midnight and champagne interface keeps discovery controls close to the tools. Cards show a short description; open a card for its full introduction and provider link.
 
-Search by name, domain or category; narrow the collection by pricing; and keep your favorite tools close. The application runs from one HTML file, with no build step, account or backend required.
+Search by name, domain or category; narrow the collection by pricing; and keep your favorite tools close. The application uses one HTML page and a separate tools.json catalog, with no framework, account or backend required. The first 24 tools are pre-rendered for crawlers and visitors without JavaScript.
 
 ## Features
 
 | Feature | What you can do |
 | --- | --- |
-| Search and filters | Search instantly and combine category and Free, Freemium, Paid or Check plans filters. |
+| Search and filters | Search instantly and combine category and Free, Freemium and Paid filters, plus a separate Pricing unverified chip. |
 | Tool introductions | Open an accessible popup with an individual description, categories, a favorite button and an official website link. |
-| Visual design | Animated hero artwork, gradient typography, card reveals, hover lighting and subtle tilt effects. |
+| Visual design | One champagne accent, a subtle rise-and-fade card reveal and a single optional orbit animation. |
 | Motion controls | Toggle decorative motion; respect the system’s reduced-motion preference. |
 | Navigation shortcuts | Sticky search and filters, `/` to focus search, scroll progress and a back-to-top button. |
 | Sorting | Browse A → Z, Z → A, or starred tools first. |
 | Saved favorites | Star tools and retain your choices in the same browser. |
-| Responsive interface | Use the directory on mobile, tablet and desktop. |
+| Responsive interface | Mobile category chips, search-only sticky controls and expandable filters. |
+| Shareable views | Search, category, tier and sort are restored from the URL query string. |
+| No-JS fallback | Browse 24 pre-rendered cards with descriptions and provider links. |
+| Pricing verification | View verification dates when recorded; unknown prices are labeled explicitly. |
+| Link previews | Open Graph and Twitter large-image cards plus an Apple touch icon. |
 | Keyboard access | Skip to content, use labeled controls and close the mobile menu with Escape. |
 | Lightweight delivery | Load icons lazily; use a letter fallback if icon sources fail. |
 | Share previews | Page description and social metadata identify the directory when shared. |
@@ -64,7 +68,7 @@ Search by name, domain or category; narrow the collection by pricing; and keep y
 
 ## Getting started
 
-Use the [live directory](https://nauman-rajput.github.io/AI-Directory/) or download `index.html` and open it in a modern browser.
+Use the [live directory](https://nauman-rajput.github.io/AI-Directory/), or clone and serve the repository locally so the browser can load tools.json.
 
 To work with the repository:
 
@@ -73,37 +77,38 @@ git clone https://github.com/Nauman-rajput/AI-Directory.git
 cd AI-Directory
 ```
 
-Open `index.html`, or serve it locally for a consistent browser origin:
+Serve the repository locally:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`. Python is optional; it is only needed for this local-server command. External fonts, icons and linked services require internet access.
+Then visit `http://localhost:8000`. You can use any local HTTP server; Python is only needed for the example above. External fonts, icons and linked services require internet access.
 
 ## Adding a tool
 
-Entries live in the `RAW` array inside `index.html`:
+Entries and individual introductions live in `tools.json`. Keep the category codes defined in its `categories` object.
 
-```js
-["Tool name", "https://official.example/", "CH WP", "freemium"],
+```json
+{
+  "name": "Tool name",
+  "url": "https://official.example/",
+  "categories": ["CH", "WP"],
+  "tier": "freemium",
+  "pricing_verified": null
+}
 ```
 
-The fields are **name**, **official URL**, **category codes** and **pricing tier**. The first category is the primary category; additional codes make the tool discoverable in other categories.
+The first category is the primary category. Use `free`, `freemium`, `paid` or `unknown` for the tier. Unknown pricing is labeled **Pricing unverified** and can be selected with its separate chip. Use an actual `YYYY-MM-DD` date only when pricing has been checked; `null` means no verification date is recorded. A downloadable model license does not establish hosted API pricing.
 
-- **Free:** the listed tool is available without a paid plan.
-- **Freemium:** limited free usage or credits are available, with paid upgrades.
-- **Paid:** a paid plan is required; a temporary trial alone does not make a tool free.
+Add a matching full description to the `TOOL_INTROS` object in the same JSON file, keyed by the exact URL. Prefer official pages and avoid unsupported claims or duplicate URLs.
 
-- **Check plans (`unknown`):** pricing has not been verified; check the provider’s current plans.
+After editing the catalog, regenerate the 24 static fallback cards and validate:
 
-Add a matching description to `TOOL_INTROS`, keyed by the exact URL:
-
-```js
-"https://official.example/": "Tool name helps users perform a specific task. Describe its actual capabilities without unsupported claims.",
+```bash
+node scripts/prerender-directory.cjs
+node scripts/validate-directory.cjs
 ```
-
-Prefer official product pages, verify pricing, and avoid duplicate URLs or unsupported promotional claims. See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete process.
 
 ## Validation and deployment
 
@@ -113,7 +118,7 @@ Run the dependency-free validator with Node.js:
 node scripts/validate-directory.cjs
 ```
 
-Also check search, filters, favorites and mobile navigation in a browser. The validator checks data and syntax; it does not confirm that external websites are reachable or that their prices remain current.
+Also check search, filters, favorites and mobile navigation in a browser. The validator checks JSON data, pricing dates, introduction coverage, static-card ordering, JavaScript syntax and sharing asset dimensions. It does not confirm that external websites are reachable or that prices remain current.
 
 GitHub Actions validates pushes to `main` and pull requests. Successful pushes to `main` publish the HTML application to GitHub Pages. Pull requests run validation without deploying.
 
@@ -121,7 +126,11 @@ GitHub Actions validates pushes to `main` and pull requests. Successful pushes t
 
 ```text
 AI-Directory/
-├── index.html                  # Standalone directory and tool data
+├── index.html                  # UI, static fallback, CSS and JavaScript
+├── tools.json                  # Categories, tools, pricing dates and introductions
+├── og-image.png                # 1200×630 sharing image
+├── apple-touch-icon.png        # 180×180 home-screen icon
+├── scripts/prerender-directory.cjs
 ├── assets/banner.svg           # Repository banner
 ├── scripts/validate-directory.cjs
 ├── .github/                    # Workflow and contribution templates

@@ -44,7 +44,7 @@ jobs:
       - name: Prepare public site
         run: |
           mkdir -p _site
-          cp index.html _site/index.html
+          cp index.html tools.json og-image.png apple-touch-icon.png _site/
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
